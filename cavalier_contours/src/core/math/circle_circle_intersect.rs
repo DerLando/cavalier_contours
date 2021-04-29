@@ -1,7 +1,7 @@
 use super::Vector2;
 use crate::core::traits::Real;
 
-/// Holds the result of finding the intersect between a line segment and a circle.
+/// Holds the result of finding the intersect between two circles.
 #[derive(Debug, Copy, Clone)]
 pub enum CircleCircleIntr<T>
 where
@@ -26,6 +26,29 @@ where
 }
 
 /// Finds the intersects between two circles.
+/// The circles are defined by their radii: `radius1`, `radius2` and their centers: `center1`, `center2`.
+///
+/// # Examples
+///
+/// ```
+/// # use cavalier_contours::core::math::*;
+/// // the trusty old unit-circle
+/// let unit_center: Vector2<f64> = Vector2::zero();
+/// let unit_radius = 1.0f64;
+///
+/// // intersect with some other circle
+/// let intersect = circle_circle_intr(unit_radius, unit_center, 2.0f64.sqrt(), Vector2::new(0.0, 1.0));
+///
+/// match intersect {
+///     CircleCircleIntr::TwoIntersects{point1, point2} => {
+///         println!("{:?}", point1);    
+///         assert!(point1.fuzzy_eq(Vector2::new(1.0, 0.0)));
+///         assert!(point2.fuzzy_eq(Vector2::new(-1.0, 0.0)));
+///     },
+///     _ => assert!(false)
+/// }
+/// ```
+///
 pub fn circle_circle_intr<T>(
     radius1: T,
     center1: Vector2<T>,
