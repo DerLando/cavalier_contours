@@ -31,6 +31,30 @@ where
 /// points `p0` and `p1` given. If `t < 0` then the intersect is nearest to `p0`, if `t > 1.0` then the intersect is nearest to `p1`).
 /// Intersects are "sticky" and "snap" to tangent points using fuzzy comparisons, e.g. a segment very close to being tangent line
 /// will return a single intersect point.
+///
+/// # Examples
+///
+/// ```
+/// # use cavalier_contours::core::math::*;
+/// # use cavalier_contours::core::traits::*;
+/// // a line segment on the x-axis
+/// let p0: Vector2<f64> = Vector2::new(-2.0, 0.0);
+/// let p1 = Vector2::new(2.0, 0.0);
+///
+/// // the unit circle
+/// let radius = 1.0;
+/// let circle_center = Vector2::zero();
+///
+/// // intersect and check results
+/// let intr = line_circle_intr(p0, p1, radius, circle_center);
+/// match intr {
+///     LineCircleIntr::TwoIntersects{t0, t1} => {
+///         assert!(t0.fuzzy_eq(0.25));
+///         assert!(t1.fuzzy_eq(0.75));
+///     },
+///     _ => assert!(false)
+/// }
+/// ```
 pub fn line_circle_intr<T>(
     p0: Vector2<T>,
     p1: Vector2<T>,
