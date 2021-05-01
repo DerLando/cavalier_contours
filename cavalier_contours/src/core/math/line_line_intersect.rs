@@ -36,6 +36,32 @@ where
 ///
 /// Line segments are defined by `v1->v2` and `u1->u2`.
 /// Handles the cases where the lines may be parallel, collinear, or single points.
+///
+/// # Examples
+///
+/// ```
+/// # use cavalier_contours::core::math::*;
+/// # use cavalier_contours::core::traits::*;
+/// 
+/// // horizontal line segment on x-axis
+/// let v1: Vector2<f64> = Vector2::new(-2.0, 0.0);
+/// let v2 = Vector2::new(2.0, 0.0);
+///
+/// // vertical line segment on y-axis
+/// let u1 = Vector2::new(0.0, 3.0);
+/// let u2 = Vector2::new(0.0, -1.0);
+/// 
+/// // intersect the segments and check results
+/// let intr = line_line_intr(v1, v2, u1, u2);
+/// match intr {
+///     LineLineIntr::TrueIntersect{seg1_t, seg2_t} => {
+///         assert!(seg1_t.fuzzy_eq(0.5));
+///         assert!(seg2_t.fuzzy_eq(0.75));
+///     },
+///     _ => assert!(false)
+/// 
+/// }
+/// ```
 pub fn line_line_intr<T>(
     v1: Vector2<T>,
     v2: Vector2<T>,

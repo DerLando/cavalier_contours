@@ -41,7 +41,6 @@ where
 ///
 /// match intersect {
 ///     CircleCircleIntr::TwoIntersects{point1, point2} => {
-///         println!("{:?}", point1);    
 ///         assert!(point1.fuzzy_eq(Vector2::new(1.0, 0.0)));
 ///         assert!(point2.fuzzy_eq(Vector2::new(-1.0, 0.0)));
 ///     },
